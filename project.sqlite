@@ -1,0 +1,42 @@
+--Explore data structure
+SELECT *
+FROM startups
+LIMIT 10;
+
+--# cos
+SELECT count(name)
+FROM startups;
+
+--valuation
+SELECT sum(valuation)
+FROM startups;
+
+--max raised
+SELECT max(raised), name, location
+FROM startups
+WHERE stage = 'Seed';
+
+--oldest co
+SELECT min(founded), name, location
+FROM startups;
+
+--valuation by sector
+SELECT round(avg(valuation),2), category
+FROM startups
+GROUP BY 2
+ORDER BY 1 DESC
+LIMIT 10;
+
+--most competitive categories
+SELECT category, count(name)
+FROM startups
+GROUP BY 1
+HAVING count(*) > 3
+ORDER BY 2 DESC;
+
+--startup sizes
+SELECT location, avg(employees)
+FROM startups
+GROUP BY location
+HAVING avg(employees) > 500
+ORDER BY 2 DESC;
